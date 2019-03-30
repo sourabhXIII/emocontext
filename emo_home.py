@@ -17,7 +17,8 @@ EMBEDDING_DIM = 300
 OUTPUT_DIM = 4
 kfold_splits = 5
 
-BASE_PATH = r'C:\__MyComputer\OneDrive - Teradata\Drive_SM\Course\emo_context'
+# BASE_PATH = r'C:\__MyComputer\OneDrive - Teradata\Drive_SM\Course\emo_context'
+BASE_PATH = r'/home/dell/sm186047/emocontext'
 TOKENIZER_PATH = BASE_PATH+os.sep+r'tokenizer.pcl'
 TRAIN_DATA_PATH = BASE_PATH+os.sep+r'data'+os.sep+'train_combined.txt'
 
@@ -98,6 +99,7 @@ def train_model(embedding_matrix, turn1_sequences, turn2_sequences, turn3_sequen
     # train model
     hist = emocon.train(t1_train, t1_test, t2_train, t2_test, t3_train, t3_test, t1_woe_train, t1_woe_test
         , t2_woe_train, t2_woe_test, t3_woe_train, t3_woe_test, target_train, target_test, class_weights)
+    
     # hist = emocon.train(conv_train, conv_test, target_train, target_test, class_weights)
     return hist
 
@@ -252,7 +254,7 @@ def main():
     turn_list.extend(turn_arr[:, 1].tolist())
     turn_list.extend(turn_arr[:, 2].tolist())
 
-    # # oov_words = check_embedding_quality(turn_list)
+    oov_words = check_embedding_quality(turn_list)
 
     # # embedding_matrix, vectorizer = \
     # #     get_embedding_matrix_and_vectorizer(conversations)
